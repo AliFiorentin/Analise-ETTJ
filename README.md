@@ -23,8 +23,8 @@ O modelo de Svensson pode ser usado para prever as taxas de juros futuras e para
 
 # Requisitos
 
-Software R v.4.2.3 ou maior
-Pacotes Xts e Zoo
+Software R v.4.2.3 ou maior.
+Pacotes Xts e Zoo.
 
 
 
