@@ -24,7 +24,7 @@ return(EstResults)}
 
 'NSS.estimator' <- function( rate, maturity, tau1, tau2 )
 
-{beta <- lm( rate ~ 1 + beta1(maturity,tau1) +beta2(maturity,tau1) + beta2(maturity,tau2))
+{beta <- lm( rate ~ 1 + beta1(maturity,tau1) + beta2(maturity,tau1) + beta2(maturity,tau2))
 betaPar <- coef(beta)
 NaValues <- na.omit(betaPar)
 if( length(NaValues)<4 ) betaPar <- c(0,0,0,0)
@@ -51,11 +51,11 @@ InterResultsTau2 <- matrix(0,length(Tau2Values), 7)
 # colnames( InterResults ) <- c("beta0","beta1","beta2","beta_3","Tau1","Tau2","SSR")
 for( i in 1:length(Tau1Values))
 
-{Tau1Temp <- optimize(.beta2,interval=c(0.001,max(Tau1Values)),maturity=Tau1Values[i],maximum=TRUE)$maximum
+{Tau1Temp <- optimize(beta2,interval=c(0.001,max(Tau1Values)),maturity=Tau1Values[i],maximum=TRUE)$maximum
 for( a in 1:length(Tau2Values))
 
-{Tau2Temp <- optimize(.beta2,interval=c(0.001,maturity[pillars.number]),maturity=Tau2Values[a],maximum=TRUE)$maximum
-InterEstimation <- .NSS.estimator(as.numeric(rate[j,]), maturity, Tau1Temp, Tau2Temp)
+{Tau2Temp <- optimize(beta2,interval=c(0.001,maturity[pillars.number]),maturity=Tau2Values[a],maximum=TRUE)$maximum
+InterEstimation <- NSS.estimator(as.numeric(rate[j,]), maturity, Tau1Temp, Tau2Temp)
 BetaCoef <- InterEstimation$Par
 SSR <- sum(InterEstimation$Res^2)
 InterResultsTau2[a,] <- c(BetaCoef, Tau1Temp, Tau2Temp, SSR)}
